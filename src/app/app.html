@@ -14,10 +14,22 @@
               <th>Name</th>
               <th>Contact</th>
               <th>Email</th>
+              <th class="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            
+            @for (item of employeeList; track $index) {
+              <tr>
+                <td>{{$index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.contactNo}}</td>
+                <td>{{item.email}}</td>
+                <td class="text-center">
+                  <button class="btn btn-secondary" (click)= "onEdit(item)" >Edit</button>
+                  <button class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>
@@ -41,6 +53,10 @@
               <label for="">Email-id</label>
               <input type="text" formControlName="email" class="form-control">
             </div>
+            <div class="col-6">
+              <label for="">Contact</label>
+              <input type="text" formControlName="contactNo" class="form-control">
+            </div>
              <div class="col-6">
               <label for="">City</label>
               <input type="text" formControlName="city" class="form-control">
@@ -63,7 +79,7 @@
               <button class="btn btn-secondary"> Reset</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success"> Submit</button>
+              <button class="btn btn-success" (click)="onSave()"> Submit</button>
             </div>
           </div>
 

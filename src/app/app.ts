@@ -14,8 +14,16 @@ export class App {
 
   empoyeeForm: FormGroup = new FormGroup({});
   employeeObj: employeeModel = new employeeModel();
+  employeeList: employeeModel[] = [];
+
   constructor(){
     this.createForm();
+    const oldData = localStorage.getItem("EmpData");
+    if(oldData != null){
+      const parseData = JSON.parse(oldData);
+      this.employeeList = parseData;
+    }
+
   }
   createForm(){
     this.empoyeeForm=new FormGroup({
@@ -29,4 +37,23 @@ export class App {
       address: new FormControl(this.employeeObj.address)
     });
   }
+
+  onSave(){
+    const oldData = localStorage.getItem("EmpData");
+    if(oldData != null){
+      const parseData = JSON.parse(oldData);
+      this.empoyeeForm.controls['empId'].setValue(parseData.length+1);
+      this.employeeList.unshift(this.empoyeeForm.value);
+      
+    }
+    else{
+      this.employeeList.unshift(this.empoyeeForm.value);
+    }
+    localStorage.setItem("EmpData",JSON.stringify(this.employeeList));
+  }
+
+  onEdit(item : employeeModel){
+    
+  }
+
 }
