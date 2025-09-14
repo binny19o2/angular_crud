@@ -26,7 +26,7 @@
                 <td>{{item.email}}</td>
                 <td class="text-center">
                   <button class="btn btn-secondary" (click)= "onEdit(item)" >Edit</button>
-                  <button class="btn btn-danger">Delete</button>
+                  <button class="btn btn-danger" (click)="onDelete(item.empId!)">Delete</button>
                 </td>
               </tr>
             }
@@ -43,11 +43,18 @@
         <h6>New Employee</h6>
       </div>
       <div class="card-body">
-        <form [formGroup] = "empoyeeForm">
+        <form [formGroup] = "employeeForm">
           <div class="row">
             <div class="col-6">
               <label for="">Name</label>
               <input type="text" formControlName="name" class="form-control">
+              <div class="text-danger">
+                @if(employeeForm.controls['name'].touched){
+                  @if(employeeForm.controls['name'].errors?.["required"]){
+                    <span>Name is required</span>
+                  }
+                }
+              </div>
             </div>
              <div class="col-6">
               <label for="">Email-id</label>
@@ -76,10 +83,15 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-secondary"> Reset</button>
+              <button class="btn btn-secondary" (click)="resetForm()"> Reset</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success" (click)="onSave()"> Submit</button>
+              @if (!employeeObj.empId) {
+                <button class="btn btn-success" [disabled]="employeeForm.invalid" (click)="onSave()"> Submit</button>
+              }
+              @else {
+                <button class="btn btn-warning" [disabled]="employeeForm.invalid" (click)="onUpdate()"> Update</button>
+              }
             </div>
           </div>
 

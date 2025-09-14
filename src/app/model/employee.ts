@@ -1,5 +1,5 @@
 export class employeeModel{
-    emp_id!:number;
+    empId:number | null;
     name! : string;
     email! : string;
     contactNo! : string;
@@ -9,7 +9,7 @@ export class employeeModel{
     pinCode! : string;
 
     constructor(){
-        this.emp_id=0;
+        this.empId=null;
         this.name="";
         this.email="";
         this.contactNo="";
