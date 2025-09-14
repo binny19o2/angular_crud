@@ -1,6 +1,6 @@
 # AngularCrud
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+Angular App to perform CRUD operations.
 
 ## Development server
 
